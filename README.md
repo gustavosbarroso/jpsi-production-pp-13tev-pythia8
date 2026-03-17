@@ -1,46 +1,38 @@
 # Study of J/ψ Production in pp Collisions at √s = 13 TeV
 
-This project studies the production of J/ψ mesons in proton–proton collisions at √s = 13 TeV using Monte Carlo simulations with Pythia8.
-The simulation results are compared with experimental measurements through the transverse momentum (pT) differential cross section.
+This repository contains a Monte Carlo simulation of J/ψ production in proton–proton collisions at √s = 13 TeV using **Pythia8**, with analysis performed using **ROOT**.
 
-The code was developed as part of an undergraduate research project (PIBIC).
+The project was developed as part of an undergraduate research project (PIBIC) in Physical Engineering at UNICAMP.
+
+The simulation generates events, reconstructs J/ψ mesons, separates prompt and non-prompt contributions, and compares the resulting transverse momentum distribution with experimental data.
 
 ---
 
 # Physics Motivation
 
-The J/ψ meson is a bound state of a charm quark and an anti-charm quark.
-Studying its production in high-energy proton–proton collisions helps us understand:
+The J/ψ meson is a bound state of a charm quark and an anti-charm quark (c\bar{c}).
+Studying its production in high-energy proton–proton collisions provides insight into:
 
 * Quantum Chromodynamics (QCD)
 * Heavy quark production mechanisms
-* Contributions from prompt and non-prompt J/ψ production
+* Contributions from B-hadron decays
+* The interplay between perturbative and non-perturbative QCD effects
 
-In this simulation, the transverse momentum distribution of J/ψ particles is calculated and compared with experimental data.
-
----
-
-# Tools Used
-
-* Pythia8 — event generation
-* ROOT — data analysis and histogramming
-* C++ — implementation language
+In this project, the differential cross section as a function of transverse momentum is studied and compared with experimental measurements.
 
 ---
 
 # Simulation Setup
 
-The simulation generates proton–proton collisions at:
+Events are generated using **Pythia8** with the following configuration:
 
-√s = 13 TeV
-
-Key physics settings include:
-
-* Inclusive soft QCD processes
+* Proton–proton collisions
+* Center-of-mass energy: √s = 13 TeV
 * Charmonium production enabled
-* Multiple parton interactions (MPI)
-* Initial-state radiation (ISR)
-* Final-state radiation (FSR)
+* SoftQCD non-diffractive processes
+* Multiple Parton Interactions (MPI)
+* Initial State Radiation (ISR)
+* Final State Radiation (FSR)
 
 J/ψ particles are selected within the rapidity region:
 
@@ -50,21 +42,23 @@ J/ψ particles are selected within the rapidity region:
 
 # Analysis Performed
 
-The code performs the following steps:
+The analysis pipeline performs the following steps:
 
 1. Generate Monte Carlo events using Pythia8
-2. Identify J/ψ mesons in the event record
-3. Separate:
+2. Loop over particles in each event
+3. Identify J/ψ mesons (PDG ID = 443)
+4. Determine whether the particle originates from B-hadron decay
+5. Separate contributions into:
 
    * prompt J/ψ
-   * non-prompt J/ψ from B-hadron decays
-4. Fill transverse momentum histograms
-5. Normalize the distributions to obtain:
+   * non-prompt J/ψ
+6. Fill transverse momentum histograms
+7. Normalize the distributions to obtain
 
 d²σ / (dpT dy)
 
-6. Compare the result with experimental data
-7. Compute the ratio:
+8. Compare the simulated result with experimental data
+9. Compute the ratio:
 
 Data / Pythia8
 
@@ -73,10 +67,13 @@ Data / Pythia8
 # Repository Structure
 
 Relatorioparcial.cc
-Main simulation and analysis code.
+Main C++ simulation and analysis code.
+
+Makefile
+Compilation instructions for building the executable.
 
 jpsi_alice_style_ratio.png
-Example result showing the comparison between simulation and experimental data.
+Example output comparing simulation results with experimental data.
 
 ---
 
@@ -84,7 +81,7 @@ Example result showing the comparison between simulation and experimental data.
 
 ![J/ψ comparison](jpsi_alice_style_ratio.png)
 
-The figure shows:
+The plot shows:
 
 * Differential cross section as a function of transverse momentum
 * Experimental data points
@@ -93,26 +90,45 @@ The figure shows:
 
 ---
 
-# How to Compile
+# Requirements
 
-Make sure Pythia8 and ROOT are installed.
+To run the code you need:
 
-Example compilation command:
+* Linux environment
+* C++ compiler (g++)
+* Pythia8 installed
+* ROOT installed
 
-g++ Relatorioparcial.cc -o jpsi_analysis $(pythia8-config --cxxflags --libs) $(root-config --cflags --libs)
+---
+
+# Compilation
+
+The project uses a Makefile.
+
+To compile the code run:
+
+make
+
+This will generate the executable:
+
+relatorioparcial
+
+The Makefile automatically uses:
+
+* root-config
+* pythia8-config
+
+to include the correct compiler and linker flags.
 
 ---
 
 # Running the Simulation
 
-Run the executable:
+Run the program with:
 
-./jpsi_analysis
+./relatorioparcial
 
-The program generates events, performs the analysis and saves:
-
-* histogram outputs in a ROOT file
-* a comparison plot in PNG format
+The program will generate events, perform the analysis and produce the output files.
 
 ---
 
@@ -122,11 +138,13 @@ jpsi_output.root
 ROOT file containing the generated histograms.
 
 jpsi_alice_style_ratio.png
-Plot comparing simulation and experimental data.
+Plot comparing experimental data with the Pythia8 simulation.
 
 ---
 
 # Author
 
 Gustavo Sobreira Barroso
-Undergraduate student in Physical Engineering – UNICAMP
+Undergraduate Student – Physical Engineering
+UNICAMP
+
