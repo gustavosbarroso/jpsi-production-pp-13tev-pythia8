@@ -39,6 +39,15 @@ J/ψ particles are selected within the rapidity region:
 |y| < 0.9
 
 ---
+Code Development and AI Assistance
+
+The C++ code used in this project was developed with the assistance of AI-based tools.
+
+The author defined the scientific objectives of the study, the physical observables to be analyzed, and the overall structure of the simulation and analysis pipeline. The AI assistant was used to support the implementation of the code, including syntax, library integration, and debugging.
+
+All physics concepts, modeling choices, simulation settings, and interpretation of the results were defined and reviewed by the author.
+
+The purpose of using AI tools was to accelerate code development while maintaining full responsibility for the scientific methodology and analysis.
 
 # Analysis Performed
 
